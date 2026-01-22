@@ -265,6 +265,14 @@ data/
     └── ...
 ```
 
+**Dataset Download:**
+
+You can download the face emotion detection dataset from:
+- **Kaggle**: [FER2013 Dataset](https://www.kaggle.com/datasets/msambare/fer2013)
+- **Alternative**: [FER2013 on Kaggle (Original)](https://www.kaggle.com/datasets/deadskull7/fer2013)
+
+**Note**: After downloading, organize the images into the folder structure shown above, with each emotion category in its own subfolder.
+
 **Current Dataset Statistics:**
 - Angry: 5,920 images
 - Disgust: 5,920 images
