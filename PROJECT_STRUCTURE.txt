@@ -1,0 +1,100 @@
+FACE EMOTION DETECTION PROJECT - FOLDER STRUCTURE
+==================================================
+
+Project Root/
+│
+├── data/                          # Dataset folder (emotion-labeled subfolders)
+│   ├── angry/                     # Angry emotion images
+│   ├── disgust/                   # Disgust emotion images
+│   ├── fear/                      # Fear emotion images
+│   ├── happy/                     # Happy emotion images
+│   ├── neutral/                   # Neutral emotion images
+│   ├── sad/                       # Sad emotion images
+│   └── surprise/                  # Surprise emotion images
+│
+├── models/                        # Saved models and artifacts
+│   ├── emotion_model.h5          # Trained model (generated after training)
+│   ├── label_encoder.pkl         # Label encoder (generated after training)
+│   ├── class_names.pkl            # Class names (generated after training)
+│   ├── training_history.png       # Training curves (generated after training)
+│   ├── confusion_matrix.png       # Confusion matrix (generated after evaluation)
+│   └── classification_report.txt  # Classification report (generated after evaluation)
+│
+├── scripts/                       # Main Python scripts
+│   ├── train_model.py            # Training script
+│   ├── evaluate_model.py         # Evaluation script
+│   ├── predict_image.py          # Single image prediction script
+│   └── webcam_detection.py       # Real-time webcam detection script
+│
+├── utils/                         # Utility functions
+│   └── __init__.py               # Utility package init file
+│
+├── requirements.txt               # Python dependencies
+├── setup_project.py              # Project setup and dependency checker
+└── PROJECT_STRUCTURE.txt          # This file
+
+USAGE INSTRUCTIONS
+==================
+
+1. INSTALL DEPENDENCIES:
+   pip install -r requirements.txt
+   
+   OR run:
+   python setup_project.py
+
+2. TRAIN THE MODEL:
+   python scripts/train_model.py
+   
+   This will:
+   - Load images from data/ folders
+   - Preprocess and split data
+   - Build and train CNN model
+   - Save model to models/emotion_model.h5
+
+3. EVALUATE THE MODEL:
+   python scripts/evaluate_model.py
+   
+   This will:
+   - Load trained model
+   - Evaluate on test set
+   - Generate confusion matrix
+   - Generate classification report
+
+4. PREDICT FROM SINGLE IMAGE:
+   python scripts/predict_image.py <image_path>
+   
+   Example:
+   python scripts/predict_image.py test_face.jpg
+   
+   Optional: Save output image
+   python scripts/predict_image.py test_face.jpg --save output.jpg
+
+5. REAL-TIME WEBCAM DETECTION:
+   python scripts/webcam_detection.py
+   
+   Press 'q' to quit
+
+TECHNICAL DETAILS
+=================
+
+Model Architecture:
+- Input: 48x48x3 RGB images
+- 3 Convolutional blocks (Conv2D + MaxPooling + Dropout)
+- 2 Dense layers with dropout
+- Output: 7 emotion classes (softmax)
+
+Training:
+- Optimizer: Adam (learning_rate=0.001)
+- Loss: Categorical Crossentropy
+- Metrics: Accuracy
+- Callbacks: EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
+- Data Augmentation: Rotation, shifts, flips, zoom
+
+Data Split:
+- Training: ~70%
+- Validation: ~20%
+- Test: ~10%
+
+Face Detection:
+- Uses OpenCV Haar Cascade (haarcascade_frontalface_default.xml)
+- Automatically detects faces in images/webcam
